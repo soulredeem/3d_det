@@ -1,0 +1,523 @@
+nohup: ignoring input
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+Using tensorboardX
+Using tensorboardX
+Using tensorboardX
+Using tensorboardX
+Using tensorboardX
+Using tensorboardX
+Using tensorboardX
+Using tensorboardX
+Fix size testing.
+training chunk_sizes: [4, 4, 4, 4, 4, 4, 4, 4]
+The output will be saved to  ../../dataset/kitti_bg/kitti_8gpu_dla34_0.1r_0.1hpr
+heads {'hm': 3, 'wh': 2, 'hps': 18, 'reg': 2, 'hm_hp': 9, 'hp_offset': 2}
+Namespace(K=100, aggr_weight=0.0, agnostic_ex=False, arch='dla_34', aug_ddd=0.5, aug_rot=0.8, batch_size=32, calib_dir='', cat_spec_wh=False, center_thresh=0.1, chunk_sizes=[4, 4, 4, 4, 4, 4, 4, 4], coor_thresh=0.3, data_dir='../../dataset/kitti_bg', dataset='kitti', debug=0, debug_dir='../../dataset/kitti_bg/kitti_8gpu_dla34_0.1r_0.1hpr/debug', debugger_theme='white', demo='', dense_hp=False, dense_wh=False, dim_weight=2, distribute=False, down_ratio=4, eval_oracle_dep=False, eval_oracle_hm=False, eval_oracle_hmhp=False, eval_oracle_hp_offset=False, eval_oracle_kps=False, eval_oracle_offset=False, eval_oracle_wh=False, exp_id='kitti_8gpu_dla34_0.1r_0.1hpr', fix_res=True, flip=0.5, flip_idx=[[0, 1], [2, 3], [4, 5], [6, 7]], flip_test=False, gpus=[0, 1, 2, 3, 4, 5, 6, 7], gpus_str='0,1,2,3,4,5,6,7', head_conv=256, heads={'hm': 3, 'wh': 2, 'hps': 18, 'reg': 2, 'hm_hp': 9, 'hp_offset': 2}, hide_data_time=False, hm_hp=True, hm_hp_weight=1, hm_weight=1, hp_weight=0.1, input_h=384, input_res=768, input_w=768, keep_res=False, kitti_split='3dop', load_model='', local_rank=0, logger_save=0, lr=0.000125, lr_step=[90, 120], master_batch_size=4, mean=array([[[0.485, 0.456, 0.406]]], dtype=float32), metric='loss', mse_loss=False, nms=False, no_color_aug=False, norm_wh=False, not_cuda_benchmark=False, not_hm_hp=False, not_prefetch_test=False, not_rand_crop=False, not_reg_bbox=False, not_reg_hp_offset=False, not_reg_offset=False, num_classes=3, num_epochs=200, num_iters=-1, num_stacks=1, num_workers=48, off_weight=1, output_h=96, output_res=192, output_w=192, pad=31, peak_thresh=0.2, print_iter=100, prob_weight=1, rect_mask=False, reg_bbox=True, reg_hp_offset=True, reg_loss='l1', reg_offset=True, results_dir='../../dataset/kitti_bg/results', resume=False, root_dir='/mnt/bd/motor-car-video/guoxiaoyang/project/RTMDDP/src/lib/../..', rot_weight=0.2, rotate=0, save_all=True, save_dir='../../dataset/kitti_bg/kitti_8gpu_dla34_0.1r_0.1hpr', scale=0.4, scores_thresh=0.1, seed=317, seg_weight=1, shift=0.1, std=array([[[0.229, 0.224, 0.225]]], dtype=float32), stereo_aug=False, test=False, test_scales=[0.6], trainval=False, val_intervals=5, vis=False, vis_thresh=0.3, wh_weight=1)
+Creating model...
+DLASeg(
+  (base): DLA(
+    (base_layer): Sequential(
+      (0): Conv2d(3, 16, kernel_size=(7, 7), stride=(1, 1), padding=(3, 3), bias=False)
+      (1): SyncBatchNorm(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU(inplace=True)
+    )
+    (level0): Sequential(
+      (0): Conv2d(16, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (1): SyncBatchNorm(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU(inplace=True)
+    )
+    (level1): Sequential(
+      (0): Conv2d(16, 32, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (1): SyncBatchNorm(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): ReLU(inplace=True)
+    )
+    (level2): Tree(
+      (tree1): BasicBlock(
+        (conv1): Conv2d(32, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (tree2): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (root): Root(
+        (conv): Conv2d(128, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (project): Sequential(
+        (0): Conv2d(32, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (level3): Tree(
+      (tree1): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (tree2): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(448, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+      )
+      (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (project): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (level4): Tree(
+      (tree1): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+        (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+        (project): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (tree2): Tree(
+        (tree1): BasicBlock(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (tree2): BasicBlock(
+          (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+          (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+          (bn2): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+        (root): Root(
+          (conv): Conv2d(896, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (bn): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (relu): ReLU(inplace=True)
+        )
+      )
+      (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (project): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (level5): Tree(
+      (tree1): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (tree2): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (root): Root(
+        (conv): Conv2d(1280, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (downsample): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+      (project): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (fc): Conv2d(512, 1000, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (dla_up): DLAUp(
+    (ida_0): IDAUp(
+      (proj_1): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(512, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (up_1): ConvTranspose2d(256, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=256, bias=False)
+      (node_1): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+    )
+    (ida_1): IDAUp(
+      (proj_1): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (up_1): ConvTranspose2d(128, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=128, bias=False)
+      (node_1): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (proj_2): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (up_2): ConvTranspose2d(128, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=128, bias=False)
+      (node_2): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+    )
+    (ida_2): IDAUp(
+      (proj_1): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (up_1): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+      (node_1): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (proj_2): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (up_2): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+      (node_2): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (proj_3): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+      (up_3): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+      (node_3): DeformConv(
+        (actf): Sequential(
+          (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (1): ReLU(inplace=True)
+        )
+        (conv): DCN(
+          (conv_offset_mask): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        )
+      )
+    )
+  )
+  (ida_up): IDAUp(
+    (proj_1): DeformConv(
+      (actf): Sequential(
+        (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): ReLU(inplace=True)
+      )
+      (conv): DCN(
+        (conv_offset_mask): Conv2d(128, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+    (up_1): ConvTranspose2d(64, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), groups=64, bias=False)
+    (node_1): DeformConv(
+      (actf): Sequential(
+        (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): ReLU(inplace=True)
+      )
+      (conv): DCN(
+        (conv_offset_mask): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+    (proj_2): DeformConv(
+      (actf): Sequential(
+        (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): ReLU(inplace=True)
+      )
+      (conv): DCN(
+        (conv_offset_mask): Conv2d(256, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+    (up_2): ConvTranspose2d(64, 64, kernel_size=(8, 8), stride=(4, 4), padding=(2, 2), groups=64, bias=False)
+    (node_2): DeformConv(
+      (actf): Sequential(
+        (0): SyncBatchNorm(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (1): ReLU(inplace=True)
+      )
+      (conv): DCN(
+        (conv_offset_mask): Conv2d(64, 27, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (hm): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (wh): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (hps): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(256, 18, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (reg): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (hm_hp): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(256, 9, kernel_size=(1, 1), stride=(1, 1))
+  )
+  (hp_offset): Sequential(
+    (0): Conv2d(64, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(256, 2, kernel_size=(1, 1), stride=(1, 1))
+  )
+)
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+Setting up data...
+==> initializing kittitrain data.
+loading annotations into memory...
+Done (t=6.51s)
+creating index...
+Done (t=6.61s)
+creating index...
+Done (t=6.61s)
+creating index...
+Done (t=6.63s)
+creating index...
+Done (t=6.65s)
+creating index...
+Done (t=6.67s)
+creating index...
+Done (t=6.69s)
+creating index...
+Done (t=7.14s)
+creating index...
+index created!
+index created!
+index created!
+index created!
+index created!
+index created!
+loading annotations into memory...
+index created!
+index created!
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+loading annotations into memory...
+Loaded train 29053 samples
+==> initializing kittitrain data.
+loading annotations into memory...
+loading annotations into memory...
+Done (t=6.27s)
+creating index...
+Done (t=6.29s)
+creating index...
+Done (t=6.25s)
+creating index...
+Done (t=6.29s)
+creating index...
+Done (t=6.25s)
+creating index...
+Done (t=6.33s)
+creating index...
+index created!
+index created!
+Done (t=6.42s)
+creating index...
+index created!
+index created!
+index created!
+index created!
+index created!
+Done (t=7.22s)
+creating index...
+index created!
+Loaded train 29053 samples
+Starting training...
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+/mnt/bd/motor-car-video/guoxiaoyang/software/anaconda3/envs/rtm/lib/python3.6/site-packages/torch/nn/_reduction.py:43: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+Epoch:1|0/113| train: [1][0/113]|Tot: 0:03:04 |ETA: 0:00:00 |hm_loss 15.0296 |hp_loss 9.4219 |hm_hp_loss 6.5250 |hp_offset_loss 0.6455 |wh_loss 19.3719 |off_loss 0.6067 |Data 67.221s(67.221s) |Net 184.745s
+Epoch:1|100/113| train: [1][100/113]|Tot: 0:06:07 |ETA: 0:00:00 |hm_loss 2.9587 |hp_loss 6.8418 |hm_hp_loss 2.8135 |hp_offset_loss 0.2722 |wh_loss 8.4932 |off_loss 0.2620 |Data 0.001s(0.667s) |Net 3.642s
+Epoch:2|0/113| train: [2][0/113]|Tot: 0:02:02 |ETA: 0:00:00 |hm_loss 1.9648 |hp_loss 6.8619 |hm_hp_loss 2.1908 |hp_offset_loss 0.2526 |wh_loss 5.6273 |off_loss 0.2285 |Data 100.695s(100.695s) |Net 122.986s
+Epoch:2|100/113| train: [2][100/113]|Tot: 0:05:43 |ETA: 0:00:00 |hm_loss 1.9600 |hp_loss 6.2524 |hm_hp_loss 2.1595 |hp_offset_loss 0.2516 |wh_loss 4.2933 |off_loss 0.2453 |Data 0.001s(0.998s) |Net 3.403s
+Epoch:3|0/113| train: [3][0/113]|Tot: 0:01:59 |ETA: 0:00:00 |hm_loss 1.8318 |hp_loss 6.6143 |hm_hp_loss 2.0940 |hp_offset_loss 0.2499 |wh_loss 4.4384 |off_loss 0.2277 |Data 97.017s(97.017s) |Net 119.658s
+Epoch:3|100/113| train: [3][100/113]|Tot: 0:05:43 |ETA: 0:00:00 |hm_loss 1.8820 |hp_loss 6.0711 |hm_hp_loss 2.0921 |hp_offset_loss 0.2495 |wh_loss 3.6290 |off_loss 0.2424 |Data 0.001s(0.962s) |Net 3.405s
+Epoch:4|0/113| train: [4][0/113]|Tot: 0:02:02 |ETA: 0:00:00 |hm_loss 1.7792 |hp_loss 6.5013 |hm_hp_loss 2.0363 |hp_offset_loss 0.2493 |wh_loss 4.0793 |off_loss 0.2344 |Data 78.723s(78.723s) |Net 122.302s
+Epoch:4|100/113| train: [4][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.8517 |hp_loss 5.9482 |hm_hp_loss 2.0630 |hp_offset_loss 0.2487 |wh_loss 3.2201 |off_loss 0.2408 |Data 0.001s(0.815s) |Net 3.423s
+Epoch:5|0/113| train: [5][0/113]|Tot: 0:02:02 |ETA: 0:00:00 |hm_loss 1.7481 |hp_loss 6.3495 |hm_hp_loss 2.0098 |hp_offset_loss 0.2509 |wh_loss 3.9883 |off_loss 0.2290 |Data 90.675s(90.675s) |Net 122.896s
+Epoch:5|100/113| train: [5][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.8285 |hp_loss 5.8589 |hm_hp_loss 2.0454 |hp_offset_loss 0.2481 |wh_loss 2.9344 |off_loss 0.2391 |Data 0.002s(0.899s) |Net 3.417s
+Epoch:6|0/113| train: [6][0/113]|Tot: 0:02:04 |ETA: 0:00:00 |hm_loss 1.7688 |hp_loss 6.1800 |hm_hp_loss 1.9972 |hp_offset_loss 0.2493 |wh_loss 3.5369 |off_loss 0.2262 |Data 101.368s(101.368s) |Net 124.862s
+Epoch:6|100/113| train: [6][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.8010 |hp_loss 5.7664 |hm_hp_loss 2.0218 |hp_offset_loss 0.2477 |wh_loss 2.7653 |off_loss 0.2387 |Data 0.001s(1.005s) |Net 3.410s
+Epoch:7|0/113| train: [7][0/113]|Tot: 0:01:58 |ETA: 0:00:00 |hm_loss 1.6931 |hp_loss 5.9491 |hm_hp_loss 1.9634 |hp_offset_loss 0.2512 |wh_loss 3.1375 |off_loss 0.2292 |Data 95.510s(95.510s) |Net 118.436s
+Epoch:7|100/113| train: [7][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.7843 |hp_loss 5.6644 |hm_hp_loss 2.0036 |hp_offset_loss 0.2474 |wh_loss 2.6819 |off_loss 0.2406 |Data 0.001s(0.947s) |Net 3.406s
+Epoch:8|0/113| train: [8][0/113]|Tot: 0:02:00 |ETA: 0:00:00 |hm_loss 1.6829 |hp_loss 5.7240 |hm_hp_loss 1.9676 |hp_offset_loss 0.2490 |wh_loss 2.8829 |off_loss 0.2259 |Data 103.275s(103.275s) |Net 120.319s
+Epoch:8|100/113| train: [8][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.7529 |hp_loss 5.4954 |hm_hp_loss 1.9815 |hp_offset_loss 0.2470 |wh_loss 2.4974 |off_loss 0.2393 |Data 0.001s(1.024s) |Net 3.411s
+Epoch:9|0/113| train: [9][0/113]|Tot: 0:02:02 |ETA: 0:00:00 |hm_loss 1.6858 |hp_loss 5.4667 |hm_hp_loss 1.9497 |hp_offset_loss 0.2476 |wh_loss 2.6457 |off_loss 0.2329 |Data 90.265s(90.265s) |Net 122.241s
+Epoch:9|100/113| train: [9][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.7231 |hp_loss 5.3671 |hm_hp_loss 1.9583 |hp_offset_loss 0.2466 |wh_loss 2.3776 |off_loss 0.2378 |Data 0.001s(0.896s) |Net 3.413s
+Epoch:10|0/113| train: [10][0/113]|Tot: 0:02:02 |ETA: 0:00:00 |hm_loss 1.6551 |hp_loss 5.4023 |hm_hp_loss 1.9296 |hp_offset_loss 0.2477 |wh_loss 2.5809 |off_loss 0.2262 |Data 77.461s(77.461s) |Net 122.807s
+Epoch:10|100/113| train: [10][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.7037 |hp_loss 5.2901 |hm_hp_loss 1.9405 |hp_offset_loss 0.2463 |wh_loss 2.2686 |off_loss 0.2366 |Data 0.001s(0.862s) |Net 3.420s
+Epoch:11|0/113| train: [11][0/113]|Tot: 0:02:03 |ETA: 0:00:00 |hm_loss 1.6362 |hp_loss 5.2329 |hm_hp_loss 1.9298 |hp_offset_loss 0.2488 |wh_loss 2.5112 |off_loss 0.2265 |Data 106.512s(106.512s) |Net 123.940s
+Epoch:11|100/113| train: [11][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.6867 |hp_loss 5.2341 |hm_hp_loss 1.9210 |hp_offset_loss 0.2466 |wh_loss 2.1846 |off_loss 0.2390 |Data 0.001s(1.056s) |Net 3.415s
+Epoch:12|0/113| train: [12][0/113]|Tot: 0:02:00 |ETA: 0:00:00 |hm_loss 1.6530 |hp_loss 5.1379 |hm_hp_loss 1.9289 |hp_offset_loss 0.2487 |wh_loss 2.2666 |off_loss 0.2363 |Data 95.381s(95.381s) |Net 120.094s
+Epoch:12|100/113| train: [12][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.6410 |hp_loss 5.1680 |hm_hp_loss 1.8879 |hp_offset_loss 0.2464 |wh_loss 2.0879 |off_loss 0.2371 |Data 0.001s(0.946s) |Net 3.409s
+Epoch:13|0/113| train: [13][0/113]|Tot: 0:02:12 |ETA: 0:00:00 |hm_loss 1.6559 |hp_loss 5.0576 |hm_hp_loss 1.9092 |hp_offset_loss 0.2474 |wh_loss 2.3900 |off_loss 0.2348 |Data 112.890s(112.890s) |Net 132.962s
+Epoch:13|100/113| train: [13][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.6162 |hp_loss 5.1270 |hm_hp_loss 1.8698 |hp_offset_loss 0.2462 |wh_loss 2.0466 |off_loss 0.2369 |Data 0.001s(1.122s) |Net 3.419s
+Epoch:14|0/113| train: [14][0/113]|Tot: 0:02:00 |ETA: 0:00:00 |hm_loss 1.5196 |hp_loss 4.9893 |hm_hp_loss 1.8378 |hp_offset_loss 0.2463 |wh_loss 2.4521 |off_loss 0.2336 |Data 101.947s(101.947s) |Net 120.595s
+Epoch:14|100/113| train: [14][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.5832 |hp_loss 5.0726 |hm_hp_loss 1.8429 |hp_offset_loss 0.2454 |wh_loss 2.0111 |off_loss 0.2358 |Data 0.001s(1.011s) |Net 3.423s
+Epoch:15|0/113| train: [15][0/113]|Tot: 0:02:04 |ETA: 0:00:00 |hm_loss 1.5854 |hp_loss 4.8430 |hm_hp_loss 1.8554 |hp_offset_loss 0.2476 |wh_loss 2.0245 |off_loss 0.2231 |Data 96.619s(96.619s) |Net 124.788s
+Epoch:15|100/113| train: [15][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.5553 |hp_loss 5.0176 |hm_hp_loss 1.8246 |hp_offset_loss 0.2452 |wh_loss 1.9401 |off_loss 0.2347 |Data 0.001s(0.958s) |Net 3.421s
+Epoch:16|0/113| train: [16][0/113]|Tot: 0:02:06 |ETA: 0:00:00 |hm_loss 1.5721 |hp_loss 4.6641 |hm_hp_loss 1.8617 |hp_offset_loss 0.2500 |wh_loss 1.8724 |off_loss 0.2257 |Data 105.312s(105.312s) |Net 126.200s
+Epoch:16|100/113| train: [16][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.5298 |hp_loss 4.9668 |hm_hp_loss 1.8070 |hp_offset_loss 0.2452 |wh_loss 1.8499 |off_loss 0.2338 |Data 0.001s(1.044s) |Net 3.423s
+Epoch:17|0/113| train: [17][0/113]|Tot: 0:02:05 |ETA: 0:00:00 |hm_loss 1.4674 |hp_loss 4.7784 |hm_hp_loss 1.7993 |hp_offset_loss 0.2451 |wh_loss 2.2985 |off_loss 0.2308 |Data 85.018s(85.018s) |Net 125.904s
+Epoch:17|100/113| train: [17][100/113]|Tot: 0:05:45 |ETA: 0:00:00 |hm_loss 1.5098 |hp_loss 4.9432 |hm_hp_loss 1.7919 |hp_offset_loss 0.2448 |wh_loss 1.7767 |off_loss 0.2334 |Data 0.001s(0.843s) |Net 3.421s
+Epoch:18|0/113| train: [18][0/113]|Tot: 0:01:58 |ETA: 0:00:00 |hm_loss 1.4426 |hp_loss 4.6083 |hm_hp_loss 1.8261 |hp_offset_loss 0.2516 |wh_loss 1.8246 |off_loss 0.2369 |Data 68.495s(68.495s) |Net 118.807s
+Epoch:18|100/113| train: [18][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.5036 |hp_loss 4.8986 |hm_hp_loss 1.7880 |hp_offset_loss 0.2447 |wh_loss 1.7395 |off_loss 0.2330 |Data 0.001s(0.679s) |Net 3.410s
+Epoch:19|0/113| train: [19][0/113]|Tot: 0:02:00 |ETA: 0:00:00 |hm_loss 1.5167 |hp_loss 4.6261 |hm_hp_loss 1.8192 |hp_offset_loss 0.2501 |wh_loss 1.7032 |off_loss 0.2275 |Data 84.468s(84.468s) |Net 120.617s
+Epoch:19|100/113| train: [19][100/113]|Tot: 0:05:43 |ETA: 0:00:00 |hm_loss 1.4891 |hp_loss 4.8527 |hm_hp_loss 1.7731 |hp_offset_loss 0.2453 |wh_loss 1.7187 |off_loss 0.2338 |Data 0.001s(0.838s) |Net 3.401s
+Epoch:20|0/113| train: [20][0/113]|Tot: 0:02:01 |ETA: 0:00:00 |hm_loss 1.5652 |hp_loss 4.5651 |hm_hp_loss 1.8360 |hp_offset_loss 0.2506 |wh_loss 1.8240 |off_loss 0.2357 |Data 98.596s(98.596s) |Net 121.538s
+Epoch:20|100/113| train: [20][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.4660 |hp_loss 4.8021 |hm_hp_loss 1.7570 |hp_offset_loss 0.2451 |wh_loss 1.6468 |off_loss 0.2338 |Data 0.001s(0.977s) |Net 3.412s
+Epoch:21|0/113| train: [21][0/113]|Tot: 0:01:57 |ETA: 0:00:00 |hm_loss 1.4369 |hp_loss 4.4480 |hm_hp_loss 1.8001 |hp_offset_loss 0.2480 |wh_loss 1.6128 |off_loss 0.2244 |Data 77.667s(77.667s) |Net 117.344s
+Epoch:21|100/113| train: [21][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.4506 |hp_loss 4.7731 |hm_hp_loss 1.7454 |hp_offset_loss 0.2448 |wh_loss 1.6298 |off_loss 0.2340 |Data 0.001s(0.770s) |Net 3.407s
+Epoch:22|0/113| train: [22][0/113]|Tot: 0:02:11 |ETA: 0:00:00 |hm_loss 1.4010 |hp_loss 4.3627 |hm_hp_loss 1.7743 |hp_offset_loss 0.2452 |wh_loss 1.4239 |off_loss 0.2250 |Data 76.936s(76.936s) |Net 131.550s
+Epoch:22|100/113| train: [22][100/113]|Tot: 0:05:46 |ETA: 0:00:00 |hm_loss 1.4338 |hp_loss 4.7527 |hm_hp_loss 1.7399 |hp_offset_loss 0.2445 |wh_loss 1.6265 |off_loss 0.2335 |Data 0.001s(0.821s) |Net 3.427s
+Epoch:23|0/113| train: [23][0/113]|Tot: 0:02:10 |ETA: 0:00:00 |hm_loss 1.3693 |hp_loss 4.4035 |hm_hp_loss 1.7547 |hp_offset_loss 0.2442 |wh_loss 1.5706 |off_loss 0.2259 |Data 82.596s(82.596s) |Net 130.379s
+Epoch:23|100/113| train: [23][100/113]|Tot: 0:05:44 |ETA: 0:00:00 |hm_loss 1.4196 |hp_loss 4.7326 |hm_hp_loss 1.7333 |hp_offset_loss 0.2443 |wh_loss 1.6465 |off_loss 0.2330 |Data 0.001s(0.819s) |Net 3.415s
+Epoch:24|0/113| train: [24][0/113]|Tot: 0:02:02 |ETA: 0:00:00 |hm_loss 1.4194 |hp_loss 4.2159 |hm_hp_loss 1.7454 |hp_offset_loss 0.2464 |wh_loss 1.4994 |off_loss 0.2257 |Data 94.111s(94.111s) |Net 122.392s
